@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="./camera.js"></script>
+  <title>Webcam controller</title>
+</head>
+<body>
+    <div id="wrapper">
+        <select id="select-camera" class="table_wraper">
+            <option>(Select a camera)</option>
+        </select>
+        Name of this camera: <input id="camera-name" type="text" style="width: 200px;">
+        <div class="table_wraper"><table class="gray_bg control_table"><tbody>
+            <tr>
+                <th id="single-shot">Take a single shot</th>
+                <td></td>
+                <td></td>
+                <td><button id="capture_button">snap</button></td>
+            </tr>
+        </tbody></table></div>
+        <div>
+            <video id="video"></video>
+        </div>
+        <div>Sound by <a href="https://otologic.jp">OtoLogic</a>(CC BY 4.0)</div>
+    </div>
+    <canvas id="picture" hidden></canvas>
+    <script>
+        var video_width = 2592;
+        var video_height = 1944;
+
+        const video = document.getElementById("video");
+        var video_stream;
+        var recordedBlobs = [];
+        var isRecording = false;
+        playVideo_and_getCamera();
+
+        document.getElementById("capture_button").addEventListener("click", () => {
+            captureImage(video, video_width, video_height);
+        })
+        document.getElementById("select-camera").addEventListener("change", function(){
+            playVideo();
+        });
+    </script>
+</body>
+</html>
