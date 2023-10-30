@@ -8,39 +8,59 @@
   <title>Webcam controller</title>
 </head>
 <body>
-    <div id="wrapper">
-        <select id="select-camera" class="table_wraper">
-            <option>(Select a camera)</option>
-        </select>
-        Name of this camera: <input id="camera-name" type="text" style="width: 200px;">
-        <div class="table_wraper"><table class="gray_bg control_table"><tbody>
-            <tr>
-                <th id="single-shot">Take a single shot</th>
-                <td></td>
-                <td></td>
-                <td><button id="capture_button">snap</button></td>
-            </tr>
-        </tbody></table></div>
-        <div>
-            <video id="video"></video>
-        </div>
-        <div>Sound by <a href="https://otologic.jp">OtoLogic</a>(CC BY 4.0)</div>
-    </div>
+    <table><tbody>
+        <tr>
+            <td colspan="2">
+                Colony:<input id="colony-name-input" type="text">
+                Plate number:<input id="plate-number-input" type="number">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select id="select-camera_top" class="table_wraper">
+                    <option>(Select a camera)</option>
+                </select>
+                <button id="capture_button_top">snap</button>
+                <div>
+                    <video id="video_top"></video>
+                </div>
+            </td>
+            <td>
+                <select id="select-camera_bottom" class="table_wraper">
+                    <option>(Select a camera)</option>
+                </select>
+                <button id="capture_button_bottom">snap</button>
+                <div>
+                    <video id="video_bottom"></video>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><div>Sound by <a href="https://otologic.jp">OtoLogic</a>(CC BY 4.0)</div></td>
+        </tr>
+    </tbody></table>
     <canvas id="picture" hidden></canvas>
     <script>
         var video_width = 2592;
         var video_height = 1944;
 
-        const video = document.getElementById("video");
-        var video_stream;
-        var recordedBlobs = [];
-        var isRecording = false;
-        playVideo_and_getCamera();
+        const video_top = document.getElementById("video_top");
+        const video_bottom = document.getElementById("video_bottom")
+        var video_stream_top;
+        var video_stream_bottom;
+        playVideo_and_getCamera("top");
+        playVideo_and_getCamera("bottom");
 
-        document.getElementById("capture_button").addEventListener("click", () => {
-            captureImage(video, video_width, video_height);
-        })
-        document.getElementById("select-camera").addEventListener("change", function(){
+        document.getElementById("capture_button_top").addEventListener("click", () => {
+            captureImage(video_top, video_width, video_height, "top");
+        });
+        document.getElementById("capture_button_bottom").addEventListener("click", () => {
+            captureImage(video_bottom, video_width, video_height, "bottom");
+        });
+        document.getElementById("select-camera_top").addEventListener("change", function(){
+            playVideo();
+        });
+        document.getElementById("select-camera_bottom").addEventListener("change", function(){
             playVideo();
         });
     </script>

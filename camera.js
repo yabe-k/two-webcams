@@ -1,4 +1,4 @@
-function captureImage(video, w, h){
+function captureImage(video, w, h, top_or_bottom){
     const canvas = document.getElementById("picture")
     const soundFile = "./sound/sound2.mp3";
     const audio = new Audio(soundFile);
@@ -6,12 +6,10 @@ function captureImage(video, w, h){
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, 0, 0, w, h);
 
-    var device_name = document.getElementById("camera-name").value;
-    if (device_name == ""){
-        device_name = document.getElementById("select-camera").value.slice(-16);
-    }
+    colony = document.getElementById("colony-name-input").value;
+    plate_num = document.getElementById("plate-number-input").value;
 
-    var filename = device_name + "_" + getTime() + ".png";
+    var filename = String(colony) + "_" + String(plate_num) + "_" + top_or_bottom + "_" + getTime() + ".png";
 
     canvas.toBlob( blob =>{
         const a = document.createElement("a");
@@ -58,8 +56,16 @@ async function playVideo(){
     canvas.height = video_height;
 }
 
-async function playVideo_and_getCamera(){
-    const video = document.getElementById("video");
+async function playVideo_and_getCamera(top_or_bottom){
+    if(top_or_bottom == "top"){
+        video = video_top;
+        stream = video_stream_top;
+        select_camera_element_id = "select-camera_top";
+    }else{
+        video = video_bottom;
+        stream = video_stream_bottom;
+        select_camera_element_id = "select-camera_bottom";
+    }
     video_stream = await navigator.mediaDevices.getUserMedia({
         video: {
             width: video_width,
@@ -74,7 +80,7 @@ async function playVideo_and_getCamera(){
     navigator.mediaDevices.enumerateDevices()
         .then(
             function(devices){
-                var select = document.getElementById("select-camera");
+                var select = document.getElementById(select_camera_element_id);
                 devices.forEach(function(device) {
                     //console.log(device.kind, device.label);
                     var option = document.createElement("option");
