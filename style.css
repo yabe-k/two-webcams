@@ -4,7 +4,7 @@
     width: 80%;
     margin: auto;
 }
-#video{
+video{
     width: 100%;
 }
 .center{
@@ -13,32 +13,31 @@
 .gray_bg{
     background-color: lightgray;
 }
-.control_table{
-    width: 100%;
-}
-input{
-    width: 50px;
-}
 table{
     border: 2px azure solid;
 }
 body{
     background: azure;
 }
-.spacer{
-    border-bottom: 2px solid azure;
-    height: 0px;
-}
-#select-camera{
+select{
     width: 100%;
 }
-.emphasis{
-    background-color: rgb(96, 220, 236);
+input{
+    line-height: 1;
+    padding: 5px;
+    font-size: 50px;
 }
-.conducting{
-    animation: flash_blue 1.5s linear infinite;
+#colony-name-input{
+    width: 150px;
 }
-
+#plate-number-input{
+    width: 70px;
+}
+button{
+    height: 40px;
+    width: 90px;
+    font-size: 25px;
+}
 @keyframes flash_blue {
 	0%,
 	100% {

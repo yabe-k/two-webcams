@@ -9,6 +9,14 @@ function captureImage(video, w, h, top_or_bottom){
     colony = document.getElementById("colony-name-input").value;
     plate_num = document.getElementById("plate-number-input").value;
 
+    if (colony == ""){
+        alert("Colony name is not filled.");
+        return;
+    }
+    if (plate_num == ""){
+        alert("Plate number is not specified.");
+        return;
+    }
     var filename = String(colony) + "_" + String(plate_num) + "_" + top_or_bottom + "_" + getTime() + ".png";
 
     canvas.toBlob( blob =>{
@@ -58,13 +66,13 @@ async function playVideo(){
 
 async function playVideo_and_getCamera(top_or_bottom){
     if(top_or_bottom == "top"){
-        video = video_top;
-        video_stream = video_stream_top;
-        select_camera_element_id = "select-camera_top";
+        var video = video_top;
+        var video_stream = video_stream_top;
+        var select_camera_element_id = "select-camera_top";
     }else{
-        video = video_bottom;
-        video_stream = video_stream_bottom;
-        select_camera_element_id = "select-camera_bottom";
+        var video = video_bottom;
+        var video_stream = video_stream_bottom;
+        var select_camera_element_id = "select-camera_bottom";
     }
     video_stream = await navigator.mediaDevices.getUserMedia({
         video: {
