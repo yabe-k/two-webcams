@@ -59,11 +59,11 @@ async function playVideo(){
 async function playVideo_and_getCamera(top_or_bottom){
     if(top_or_bottom == "top"){
         video = video_top;
-        stream = video_stream_top;
+        video_stream = video_stream_top;
         select_camera_element_id = "select-camera_top";
     }else{
         video = video_bottom;
-        stream = video_stream_bottom;
+        video_stream = video_stream_bottom;
         select_camera_element_id = "select-camera_bottom";
     }
     video_stream = await navigator.mediaDevices.getUserMedia({
