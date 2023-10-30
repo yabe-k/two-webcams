@@ -56,7 +56,7 @@ async function playVideo(top_or_bottom){
 
     var selectedId = document.getElementById(select_camera_element_id).value;
     //console.log(selectedId);
-    video_stream = await navigator.mediaDevices.getUserMedia({
+    var video_stream = await navigator.mediaDevices.getUserMedia({
         video: {
             deviceId: selectedId,
             width: video_width,
@@ -83,7 +83,7 @@ async function playVideo_and_getCamera(top_or_bottom){
         var video_stream = video_stream_bottom;
         var select_camera_element_id = "select-camera_bottom";
     }
-    video_stream = await navigator.mediaDevices.getUserMedia({
+    var video_stream = await navigator.mediaDevices.getUserMedia({
         video: {
             width: video_width,
             height: video_height,
