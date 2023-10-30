@@ -37,15 +37,24 @@ function getTime(){
     return now.getFullYear() + "-" + ("00" + String(Number(now.getMonth()) + 1)).slice(-2) + "-" + ("00" + now.getDate()).slice(-2) + "_" + ("00" + now.getHours()).slice(-2) + "-" + ("00" + now.getMinutes()).slice(-2)+ "-" + ("00" + now.getSeconds()).slice(-2)
 }
 
-async function playVideo(){
-    const video = document.getElementById("video");
+async function playVideo(top_or_bottom){
+    if(top_or_bottom == "top"){
+        var video = video_top;
+        var video_stream = video_stream_top;
+        var select_camera_element_id = "select-camera_top";
+    }else{
+        var video = video_bottom;
+        var video_stream = video_stream_bottom;
+        var select_camera_element_id = "select-camera_bottom";
+    }
+    //const video = document.getElementById("video");
     const tracks = video.srcObject.getTracks();
     tracks.forEach(track => {
         track.stop();
     });
     video.srcObject = null;
 
-    var selectedId = document.getElementById("select-camera").value;
+    var selectedId = document.getElementById(select_camera_element_id).value;
     //console.log(selectedId);
     video_stream = await navigator.mediaDevices.getUserMedia({
         video: {
