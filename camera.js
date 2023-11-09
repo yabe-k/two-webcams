@@ -19,6 +19,16 @@ function captureImage(video, w, h, top_or_bottom){
     }
     var filename = String(colony) + "_" + String(plate_num) + "_" + top_or_bottom + "_" + getTime() + ".png";
 
+    var history_string = String(colony) + "_" + String(plate_num) + "_" + top_or_bottom
+    if (history.includes(history_string)){
+        var response = confirm(history_string + " seems to be already recorded. Do you take a shot again?");
+        if (response){
+            
+        }else{
+            return;
+        }
+    }
+
     canvas.toBlob( blob =>{
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
@@ -29,7 +39,7 @@ function captureImage(video, w, h, top_or_bottom){
         URL.revokeObjectURL(a.href);
         
     },"image/png",1.0);
-
+    history.push(history_string);
 }
 
 function getTime(){
